@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>when aria is free</title>
+<meta name="description" content="aria's free/busy, generated from her calendars. no titles, no locations.">
+<style>
+  :root { color-scheme: light dark; --ink: #1b1a18; --dim: #6b655e; --bg: #faf7f2; --line: #e4ddd3; --go: #2f6b4f; --go-bg: #e8f3ec; }
+  @media (prefers-color-scheme: dark) { :root { --ink: #ece7e0; --dim: #9a938a; --bg: #17161a; --line: #2c2a30; --go: #8fd6ae; --go-bg: #1e2b24; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 2.2rem 1.2rem 4rem; background: var(--bg); color: var(--ink);
+         font: 16px/1.5 ui-rounded, "SF Pro Rounded", -apple-system, "Segoe UI", system-ui, sans-serif; }
+  main { max-width: 42rem; margin: 0 auto; }
+  h1 { font-size: 1.35rem; margin: 0 0 .2rem; font-weight: 600; letter-spacing: -.01em; }
+  .sub { color: var(--dim); font-size: .9rem; margin: 0 0 1.6rem; }
+  #stale { display: none; margin: 0 0 1.2rem; padding: .7rem .9rem; border: 1px solid #c98; border-radius: .6rem;
+           background: #fff4e5; color: #6b3d0e; font-size: .88rem; }
+  @media (prefers-color-scheme: dark) { #stale { background: #3a2a12; border-color: #7a5520; color: #f3d3a4; } }
+  ul { list-style: none; margin: 0; padding: 0; }
+  .day { display: grid; grid-template-columns: 3.1rem 1fr auto; gap: .1rem .7rem; align-items: baseline;
+         padding: .62rem 0; border-top: 1px solid var(--line); }
+  .day:first-child { border-top: 0; }
+  .wd { color: var(--dim); font-size: .82rem; text-transform: lowercase; }
+  .date { font-size: .96rem; }
+  .slots { color: var(--dim); font-size: .88rem; text-align: right; font-variant-numeric: tabular-nums; }
+  .free .slots { color: var(--dim); opacity: .7; }
+  .travel { background: var(--go-bg); border-radius: .5rem; padding: .62rem .6rem; border-top-color: transparent; }
+  .travel .date { font-weight: 600; }
+  .badge { grid-column: 2 / -1; color: var(--go); font-size: .82rem; }
+  footer { margin-top: 2rem; color: var(--dim); font-size: .8rem; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>when aria is free</h1>
+  <p class="sub">times in Australia/Melbourne · Friday 6 November onward</p>
+  <p id="stale"></p>
+  <ul>
+      <li class="day">
+        <span class="wd">Fri</span>
+        <span class="date">Friday 6 November</span>
+        <span class="slots">09:00–10:00 · 12:20–19:00</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Sat</span>
+        <span class="date">Saturday 7 November</span>
+        <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Sun</span>
+        <span class="date">Sunday 8 November</span>
+        <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–20:30</span>
+        
+      </li>
+      <li class="day travel free">
+        <span class="wd">Mon</span>
+        <span class="date">Monday 9 November</span>
+        <span class="slots">free</span>
+        <span class="badge">can travel — Bendigo or Melbourne</span>
+      </li>
+      <li class="day">
+        <span class="wd">Tue</span>
+        <span class="date">Tuesday 10 November</span>
+        <span class="slots">09:30–11:30 · 15:20–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Wed</span>
+        <span class="date">Wednesday 11 November</span>
+        <span class="slots"><b>busy all day</b></span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Thu</span>
+        <span class="date">Thursday 12 November</span>
+        <span class="slots"><b>busy all day</b></span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Fri</span>
+        <span class="date">Friday 13 November</span>
+        <span class="slots">09:00–10:00 · 11:00–11:30 · 12:20–19:00</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Sat</span>
+        <span class="date">Saturday 14 November</span>
+        <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Sun</span>
+        <span class="date">Sunday 15 November</span>
+        <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–14:30 · 16:30–18:30</span>
+        
+      </li>
+      <li class="day travel free">
+        <span class="wd">Mon</span>
+        <span class="date">Monday 16 November</span>
+        <span class="slots">free</span>
+        <span class="badge">can travel — Bendigo or Melbourne</span>
+      </li>
+      <li class="day">
+        <span class="wd">Tue</span>
+        <span class="date">Tuesday 17 November</span>
+        <span class="slots">09:30–10:30 · 15:20–20:30</span>
+        
+      </li>
+      <li class="day travel free">
+        <span class="wd">Wed</span>
+        <span class="date">Wednesday 18 November</span>
+        <span class="slots">free</span>
+        <span class="badge">can travel — Bendigo or Melbourne</span>
+      </li>
+      <li class="day">
+        <span class="wd">Thu</span>
+        <span class="date">Thursday 19 November</span>
+        <span class="slots">09:30–10:00 · 10:50–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Fri</span>
+        <span class="date">Friday 20 November</span>
+        <span class="slots">09:30–10:00 · 10:30–11:00 · 12:20–19:00</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Sat</span>
+        <span class="date">Saturday 21 November</span>
+        <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Sun</span>
+        <span class="date">Sunday 22 November</span>
+        <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Mon</span>
+        <span class="date">Monday 23 November</span>
+        <span class="slots">11:00–11:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Tue</span>
+        <span class="date">Tuesday 24 November</span>
+        <span class="slots">09:30–10:00 · 15:20–20:30</span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Wed</span>
+        <span class="date">Wednesday 25 November</span>
+        <span class="slots"><b>busy all day</b></span>
+        
+      </li>
+      <li class="day">
+        <span class="wd">Thu</span>
+        <span class="date">Thursday 26 November</span>
+        <span class="slots"><b>busy all day</b></span>
+        
+      </li>
+  </ul>
+  <footer>
+    free/busy only — no titles, no locations, no attendees ever leave her calendar.
+    <span id="gen"></span>
+  </footer>
+</main>
+<script>
+  const generated = "2026-11-06T00:48:30.519Z";
+  const ageH = (Date.now() - Date.parse(generated)) / 36e5;
+  document.getElementById("gen").textContent = "generated " + new Date(generated).toLocaleString() + ".";
+  if (ageH > 12) {
+    const el = document.getElementById("stale");
+    el.style.display = "block";
+    el.textContent = "⚠ this page is " + Math.round(ageH) + "h old — it may be out of date.";
+  }
+</script>
+</body>
+</html>
