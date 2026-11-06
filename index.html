@@ -25,14 +25,21 @@
   .travel { background: var(--go-bg); border-radius: .5rem; padding: .62rem .6rem; border-top-color: transparent; }
   .travel .date { font-weight: 600; }
   .badge { grid-column: 2 / -1; color: var(--go); font-size: .82rem; }
-  /* THE DAY AS A 24h STRIP (her ask, 11:51): busy filled, free is the ground showing through, so "before/after
-     work" is a shape rather than a subtraction. Ticks at 00/06/12/18/24, in HER clock like everything else. */
-  .bar { grid-column: 1 / -1; position: relative; height: .5rem; margin: .35rem 0 .12rem; border-radius: 999px;
-         background: var(--line); overflow: hidden; }
-  .bar .blk { position: absolute; top: 0; bottom: 0; background: var(--ink); opacity: .75; }
-  .bar .blk.all { left: 0; right: 0; }
-  .travel .bar { background: #cfe6d8; }
-  @media (prefers-color-scheme: dark) { .travel .bar { background: #2b4a39; } }
+  /* THE DAY AS 24 HOUR BOXES (07/11, her ask): "a dotted line of rounded rectangles representing an hour …
+     still completely granular with how the bar is filled in". The boxes are only a grid to read against; every fill
+     is a percentage of the MINUTE span the text above it already prints, so the strip cannot disagree with it. */
+  .bar { grid-column: 1 / -1; position: relative; display: flex; gap: 2px; margin: .42rem 0 .12rem; }
+  .hbox { position: relative; flex: 1 1 0; min-width: 0; height: .5rem; border-radius: .17rem;
+          background: var(--line); overflow: hidden; }
+  .hbox i { position: absolute; top: 0; bottom: 0; background: var(--ink); opacity: .75; }
+  .travel .hbox { background: #cfe6d8; }
+  @media (prefers-color-scheme: dark) { .travel .hbox { background: #2b4a39; } }
+  /* the read-out: a hairline where the pointer is, and a label naming the time and the block it is in */
+  .cursor { position: absolute; top: -.18rem; bottom: -.18rem; width: 1px; background: var(--ink); opacity: .5;
+            pointer-events: none; }
+  .tip { position: absolute; bottom: 1.05rem; padding: .1rem .38rem; border-radius: .3rem; background: var(--ink);
+         color: var(--bg); font-size: .74rem; white-space: nowrap; pointer-events: none; z-index: 3; }
+  .bar:focus-visible { outline: 2px solid var(--go); outline-offset: 3px; border-radius: .3rem; }
   .ticks { grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--dim);
            font-size: .66rem; opacity: .6; letter-spacing: .02em; }
   footer { margin-top: 2rem; color: var(--dim); font-size: .8rem; }
@@ -48,15 +55,17 @@
         <span class="wd">Fri</span>
         <span class="date">Friday 6 November</span>
         <span class="slots">09:00–10:00 · 12:20–19:00</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:37.5%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:27.77777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="0"
+             aria-label="read the time on Friday 6 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sat</span>
         <span class="date">Saturday 7 November</span>
-        <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:42.70833333333333%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:34.02777777777778%"></i></div>
+        <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–23:00</span>
+        <div class="bar" role="slider" tabindex="0" data-i="1"
+             aria-label="read the time on Saturday 7 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:25.00%;width:75.00%"></i></span><span class="hbox"><i style="left:0.00%;width:25.00%"></i></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -64,7 +73,8 @@
         <span class="wd">Sun</span>
         <span class="date">Sunday 8 November</span>
         <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:8.333333333333332%"></i><i class="blk" style="left:57.638888888888886%;width:27.77777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="2"
+             aria-label="read the time on Sunday 8 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"><i style="left:83.33%;width:16.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -72,7 +82,8 @@
         <span class="wd">Mon</span>
         <span class="date">Monday 9 November</span>
         <span class="slots">10:00–12:00 · 13:00–17:00</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:41.66666666666667%;width:8.333333333333332%"></i><i class="blk" style="left:54.166666666666664%;width:16.666666666666664%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="3"
+             aria-label="read the time on Monday 9 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -80,23 +91,26 @@
         <span class="wd">Tue</span>
         <span class="date">Tuesday 10 November</span>
         <span class="slots">09:30–11:30 · 15:20–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:8.333333333333332%"></i><i class="blk" style="left:63.888888888888886%;width:21.52777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="4"
+             aria-label="read the time on Tuesday 10 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
-      <li class="day">
+      <li class="day travel free">
         <span class="wd">Wed</span>
         <span class="date">Wednesday 11 November</span>
-        <span class="slots"><b>busy all day</b></span>
-        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <span class="slots">free</span>
+        <div class="bar" role="slider" tabindex="0" data-i="5"
+             aria-label="read the time on Wednesday 11 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
-        
+        <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
       <li class="day">
         <span class="wd">Thu</span>
         <span class="date">Thursday 12 November</span>
-        <span class="slots"><b>busy all day</b></span>
-        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <span class="slots">09:30–10:00 · 10:50–20:30</span>
+        <div class="bar" role="slider" tabindex="0" data-i="6"
+             aria-label="read the time on Thursday 12 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:83.33%;width:16.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -104,7 +118,8 @@
         <span class="wd">Fri</span>
         <span class="date">Friday 13 November</span>
         <span class="slots">09:00–10:00 · 11:00–11:30 · 12:20–19:00</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:37.5%;width:4.166666666666666%"></i><i class="blk" style="left:45.83333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:51.388888888888886%;width:27.77777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="7"
+             aria-label="read the time on Friday 13 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -112,7 +127,8 @@
         <span class="wd">Sat</span>
         <span class="date">Saturday 14 November</span>
         <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:42.70833333333333%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:34.02777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="8"
+             aria-label="read the time on Saturday 14 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:25.00%;width:75.00%"></i></span><span class="hbox"><i style="left:0.00%;width:25.00%"></i></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -120,7 +136,8 @@
         <span class="wd">Sun</span>
         <span class="date">Sunday 15 November</span>
         <span class="slots">16:30–18:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:68.75%;width:8.333333333333332%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="9"
+             aria-label="read the time on Sunday 15 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -128,7 +145,8 @@
         <span class="wd">Mon</span>
         <span class="date">Monday 16 November</span>
         <span class="slots">free</span>
-        <div class="bar" aria-hidden="true"></div>
+        <div class="bar" role="slider" tabindex="0" data-i="10"
+             aria-label="read the time on Monday 16 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
@@ -136,7 +154,8 @@
         <span class="wd">Tue</span>
         <span class="date">Tuesday 17 November</span>
         <span class="slots">09:30–10:30 · 15:20–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:4.166666666666666%"></i><i class="blk" style="left:63.888888888888886%;width:21.52777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="11"
+             aria-label="read the time on Tuesday 17 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -144,7 +163,8 @@
         <span class="wd">Wed</span>
         <span class="date">Wednesday 18 November</span>
         <span class="slots">free</span>
-        <div class="bar" aria-hidden="true"></div>
+        <div class="bar" role="slider" tabindex="0" data-i="12"
+             aria-label="read the time on Wednesday 18 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
@@ -152,7 +172,8 @@
         <span class="wd">Thu</span>
         <span class="date">Thursday 19 November</span>
         <span class="slots">09:30–10:00 · 10:50–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:45.13888888888889%;width:40.27777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="13"
+             aria-label="read the time on Thursday 19 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:83.33%;width:16.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -160,7 +181,8 @@
         <span class="wd">Fri</span>
         <span class="date">Friday 20 November</span>
         <span class="slots">09:30–10:00 · 10:30–11:00 · 12:20–19:00</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:2.083333333333333%"></i><i class="blk" style="left:51.388888888888886%;width:27.77777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="14"
+             aria-label="read the time on Friday 20 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -168,7 +190,8 @@
         <span class="wd">Sat</span>
         <span class="date">Saturday 21 November</span>
         <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:42.70833333333333%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:34.02777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="15"
+             aria-label="read the time on Saturday 21 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:25.00%;width:75.00%"></i></span><span class="hbox"><i style="left:0.00%;width:25.00%"></i></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -176,7 +199,8 @@
         <span class="wd">Sun</span>
         <span class="date">Sunday 22 November</span>
         <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:8.333333333333332%"></i><i class="blk" style="left:57.638888888888886%;width:27.77777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="16"
+             aria-label="read the time on Sunday 22 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"><i style="left:83.33%;width:16.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -184,7 +208,8 @@
         <span class="wd">Mon</span>
         <span class="date">Monday 23 November</span>
         <span class="slots">11:00–11:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:45.83333333333333%;width:2.083333333333333%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="17"
+             aria-label="read the time on Monday 23 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -192,23 +217,26 @@
         <span class="wd">Tue</span>
         <span class="date">Tuesday 24 November</span>
         <span class="slots">09:30–10:00 · 15:20–20:30</span>
-        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:63.888888888888886%;width:21.52777777777778%"></i></div>
+        <div class="bar" role="slider" tabindex="0" data-i="18"
+             aria-label="read the time on Tuesday 24 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:33.33%;width:66.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
-      <li class="day">
+      <li class="day travel free">
         <span class="wd">Wed</span>
         <span class="date">Wednesday 25 November</span>
-        <span class="slots"><b>busy all day</b></span>
-        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <span class="slots">free</span>
+        <div class="bar" role="slider" tabindex="0" data-i="19"
+             aria-label="read the time on Wednesday 25 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
-        
+        <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
       <li class="day">
         <span class="wd">Thu</span>
         <span class="date">Thursday 26 November</span>
-        <span class="slots"><b>busy all day</b></span>
-        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <span class="slots">09:30–10:00 · 10:50–20:30</span>
+        <div class="bar" role="slider" tabindex="0" data-i="20"
+             aria-label="read the time on Thursday 26 November — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:50.00%;width:50.00%"></i></span><span class="hbox"><i style="left:83.33%;width:16.67%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:100.00%"></i></span><span class="hbox"><i style="left:0.00%;width:50.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
@@ -216,11 +244,62 @@
   <footer>
     free/busy only — no titles, no locations, no attendees ever leave her calendar.
     <span id="gen"></span>
+    <br>point at a day (or tab to it and use ← →) to read the exact time.
   </footer>
 </main>
 <script>
-  const generated = "2026-11-06T07:41:10.681Z";
+  const generated = "2026-11-06T09:24:25.492Z";
+  // Labels read off the SAME spans the boxes were filled from, so a tooltip can never contradict the colour
+  // under the pointer.
+  const DAYS = [{"label":"Friday 6 November","allDay":false,"spans":[[540,600],[740,1140]]},{"label":"Saturday 7 November","allDay":false,"spans":[[570,600],[615,675],[740,1380]]},{"label":"Sunday 8 November","allDay":false,"spans":[[570,600],[630,750],[830,1230]]},{"label":"Monday 9 November","allDay":false,"spans":[[600,720],[780,1020]]},{"label":"Tuesday 10 November","allDay":false,"spans":[[570,690],[920,1230]]},{"label":"Wednesday 11 November","allDay":false,"spans":[]},{"label":"Thursday 12 November","allDay":false,"spans":[[570,600],[650,1230]]},{"label":"Friday 13 November","allDay":false,"spans":[[540,600],[660,690],[740,1140]]},{"label":"Saturday 14 November","allDay":false,"spans":[[570,600],[615,675],[740,1230]]},{"label":"Sunday 15 November","allDay":false,"spans":[[990,1110]]},{"label":"Monday 16 November","allDay":false,"spans":[]},{"label":"Tuesday 17 November","allDay":false,"spans":[[570,630],[920,1230]]},{"label":"Wednesday 18 November","allDay":false,"spans":[]},{"label":"Thursday 19 November","allDay":false,"spans":[[570,600],[650,1230]]},{"label":"Friday 20 November","allDay":false,"spans":[[570,600],[630,660],[740,1140]]},{"label":"Saturday 21 November","allDay":false,"spans":[[570,600],[615,675],[740,1230]]},{"label":"Sunday 22 November","allDay":false,"spans":[[570,600],[630,750],[830,1230]]},{"label":"Monday 23 November","allDay":false,"spans":[[660,690]]},{"label":"Tuesday 24 November","allDay":false,"spans":[[570,600],[920,1230]]},{"label":"Wednesday 25 November","allDay":false,"spans":[]},{"label":"Thursday 26 November","allDay":false,"spans":[[570,600],[650,1230]]}];
+  const hm = (m) => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
   document.getElementById("gen").textContent = "generated " + new Date(generated).toLocaleString() + ".";
+
+  // ── the read-out ─────────────────────────────────────────────────────────────────────────────────────
+  // Hover, tap, or arrow-key a day and it says the exact time under the pointer and the block it is inside —
+  // "when does this actually start" is finer than 24 boxes at 350px can answer. ★ The day is an ARGUMENT, not a
+  // closure: a listener added inside a loop over a var captures the last day and the symptom is a label that
+  // updates the wrong row, with no error anywhere (measured on Violet's page, 06/11).
+  document.querySelectorAll(".bar").forEach((bar) => {
+    const info = DAYS[+bar.dataset.i];
+    if (!info) return;
+    const cursor = document.createElement("i"); cursor.className = "cursor"; cursor.hidden = true;
+    const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true;
+    bar.appendChild(cursor); bar.appendChild(tip);
+    let at = null;
+    const draw = (f) => {
+      at = Math.min(1, Math.max(0, f));
+      const m = Math.min(1439, Math.floor(at * 1440));
+      const hit = info.spans.find(([a, b]) => m >= a && m < b);
+      cursor.style.left = (at * 100) + "%"; cursor.hidden = false;
+      tip.textContent = hm(m) + " · " + (hit ? "busy " + hm(hit[0]) + "–" + hm(hit[1]) : "free");
+      tip.hidden = false;
+      // measure AFTER the text is set, or the width is the previous string's
+      const w = tip.offsetWidth, bw = bar.offsetWidth || 1;
+      tip.style.left = Math.min(Math.max(at * bw - w / 2, 0), Math.max(0, bw - w)) + "px";
+      bar.setAttribute("aria-valuetext", tip.textContent);
+    };
+    const clear = () => { cursor.hidden = true; tip.hidden = true; };
+    const frac = (x) => { const r = bar.getBoundingClientRect(); return r.width ? (x - r.left) / r.width : 0; };
+    bar.addEventListener("pointermove", (e) => draw(frac(e.clientX)));
+    bar.addEventListener("pointerdown", (e) => draw(frac(e.clientX)));
+    // A tap on a touch screen has no hover to end it, so the label clears on the next tap elsewhere.
+    bar.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") clear(); });
+    bar.addEventListener("blur", clear);
+    bar.addEventListener("keydown", (e) => {
+      const step = 15 / 1440;   // fifteen minutes, as a fraction of a day
+      if (e.key === "ArrowRight") { draw((at === null ? 0.5 : at) + step); e.preventDefault(); }
+      else if (e.key === "ArrowLeft") { draw((at === null ? 0.5 : at) - step); e.preventDefault(); }
+      else if (e.key === "Home") { draw(0); e.preventDefault(); }
+      else if (e.key === "End") { draw(1); e.preventDefault(); }
+      else if (e.key === "Escape") clear();
+    });
+  });
+  // one document-level clear, not one per day: a tap outside every bar should hide every label
+  document.addEventListener("pointerdown", (e) => {
+    if (e.target.closest && e.target.closest(".bar")) return;
+    document.querySelectorAll(".tip, .cursor").forEach((n) => { n.hidden = true; });
+  });
 </script>
 </body>
 </html>
