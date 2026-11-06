@@ -14,9 +14,6 @@
   main { max-width: 42rem; margin: 0 auto; }
   h1 { font-size: 1.35rem; margin: 0 0 .2rem; font-weight: 600; letter-spacing: -.01em; }
   .sub { color: var(--dim); font-size: .9rem; margin: 0 0 1.6rem; }
-  #stale { display: none; margin: 0 0 1.2rem; padding: .7rem .9rem; border: 1px solid #c98; border-radius: .6rem;
-           background: #fff4e5; color: #6b3d0e; font-size: .88rem; }
-  @media (prefers-color-scheme: dark) { #stale { background: #3a2a12; border-color: #7a5520; color: #f3d3a4; } }
   ul { list-style: none; margin: 0; padding: 0; }
   .day { display: grid; grid-template-columns: 3.1rem 1fr auto; gap: .1rem .7rem; align-items: baseline;
          padding: .62rem 0; border-top: 1px solid var(--line); }
@@ -36,7 +33,6 @@
 <main>
   <h1>when aria is free</h1>
   <p class="sub">times in Australia/Melbourne · Friday 6 November onward</p>
-  <p id="stale"></p>
   <ul>
       <li class="day">
         <span class="wd">Fri</span>
@@ -171,14 +167,8 @@
   </footer>
 </main>
 <script>
-  const generated = "2026-11-06T00:49:13.565Z";
-  const ageH = (Date.now() - Date.parse(generated)) / 36e5;
+  const generated = "2026-11-06T00:49:31.715Z";
   document.getElementById("gen").textContent = "generated " + new Date(generated).toLocaleString() + ".";
-  if (ageH > 12) {
-    const el = document.getElementById("stale");
-    el.style.display = "block";
-    el.textContent = "⚠ this page is " + Math.round(ageH) + "h old — it may be out of date.";
-  }
 </script>
 </body>
 </html>
