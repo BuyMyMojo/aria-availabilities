@@ -25,6 +25,16 @@
   .travel { background: var(--go-bg); border-radius: .5rem; padding: .62rem .6rem; border-top-color: transparent; }
   .travel .date { font-weight: 600; }
   .badge { grid-column: 2 / -1; color: var(--go); font-size: .82rem; }
+  /* THE DAY AS A 24h STRIP (her ask, 11:51): busy filled, free is the ground showing through, so "before/after
+     work" is a shape rather than a subtraction. Ticks at 00/06/12/18/24, in HER clock like everything else. */
+  .bar { grid-column: 1 / -1; position: relative; height: .5rem; margin: .35rem 0 .12rem; border-radius: 999px;
+         background: var(--line); overflow: hidden; }
+  .bar .blk { position: absolute; top: 0; bottom: 0; background: var(--ink); opacity: .75; }
+  .bar .blk.all { left: 0; right: 0; }
+  .travel .bar { background: #cfe6d8; }
+  @media (prefers-color-scheme: dark) { .travel .bar { background: #2b4a39; } }
+  .ticks { grid-column: 1 / -1; display: flex; justify-content: space-between; color: var(--dim);
+           font-size: .66rem; opacity: .6; letter-spacing: .02em; }
   footer { margin-top: 2rem; color: var(--dim); font-size: .8rem; }
   footer a { color: inherit; }
 </style>
@@ -38,126 +48,168 @@
         <span class="wd">Fri</span>
         <span class="date">Friday 6 November</span>
         <span class="slots">09:00–10:00 · 12:20–19:00</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:37.5%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:27.77777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sat</span>
         <span class="date">Saturday 7 November</span>
         <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:42.70833333333333%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:34.02777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sun</span>
         <span class="date">Sunday 8 November</span>
         <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:8.333333333333332%"></i><i class="blk" style="left:57.638888888888886%;width:27.77777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day travel free">
         <span class="wd">Mon</span>
         <span class="date">Monday 9 November</span>
         <span class="slots">free</span>
+        <div class="bar" aria-hidden="true"></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
       <li class="day">
         <span class="wd">Tue</span>
         <span class="date">Tuesday 10 November</span>
         <span class="slots">09:30–11:30 · 15:20–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:8.333333333333332%"></i><i class="blk" style="left:63.888888888888886%;width:21.52777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Wed</span>
         <span class="date">Wednesday 11 November</span>
         <span class="slots"><b>busy all day</b></span>
+        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Thu</span>
         <span class="date">Thursday 12 November</span>
         <span class="slots"><b>busy all day</b></span>
+        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Fri</span>
         <span class="date">Friday 13 November</span>
         <span class="slots">09:00–10:00 · 11:00–11:30 · 12:20–19:00</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:37.5%;width:4.166666666666666%"></i><i class="blk" style="left:45.83333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:51.388888888888886%;width:27.77777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sat</span>
         <span class="date">Saturday 14 November</span>
         <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:42.70833333333333%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:34.02777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sun</span>
         <span class="date">Sunday 15 November</span>
         <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–14:30 · 16:30–18:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:8.333333333333332%"></i><i class="blk" style="left:57.638888888888886%;width:2.7777777777777777%"></i><i class="blk" style="left:68.75%;width:8.333333333333332%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day travel free">
         <span class="wd">Mon</span>
         <span class="date">Monday 16 November</span>
         <span class="slots">free</span>
+        <div class="bar" aria-hidden="true"></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
       <li class="day">
         <span class="wd">Tue</span>
         <span class="date">Tuesday 17 November</span>
         <span class="slots">09:30–10:30 · 15:20–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:4.166666666666666%"></i><i class="blk" style="left:63.888888888888886%;width:21.52777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day travel free">
         <span class="wd">Wed</span>
         <span class="date">Wednesday 18 November</span>
         <span class="slots">free</span>
+        <div class="bar" aria-hidden="true"></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         <span class="badge">can travel — Bendigo or Melbourne</span>
       </li>
       <li class="day">
         <span class="wd">Thu</span>
         <span class="date">Thursday 19 November</span>
         <span class="slots">09:30–10:00 · 10:50–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:45.13888888888889%;width:40.27777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Fri</span>
         <span class="date">Friday 20 November</span>
         <span class="slots">09:30–10:00 · 10:30–11:00 · 12:20–19:00</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:2.083333333333333%"></i><i class="blk" style="left:51.388888888888886%;width:27.77777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sat</span>
         <span class="date">Saturday 21 November</span>
         <span class="slots">09:30–10:00 · 10:15–11:15 · 12:20–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:42.70833333333333%;width:4.166666666666666%"></i><i class="blk" style="left:51.388888888888886%;width:34.02777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Sun</span>
         <span class="date">Sunday 22 November</span>
         <span class="slots">09:30–10:00 · 10:30–12:30 · 13:50–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:43.75%;width:8.333333333333332%"></i><i class="blk" style="left:57.638888888888886%;width:27.77777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Mon</span>
         <span class="date">Monday 23 November</span>
         <span class="slots">11:00–11:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:45.83333333333333%;width:2.083333333333333%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Tue</span>
         <span class="date">Tuesday 24 November</span>
         <span class="slots">09:30–10:00 · 15:20–20:30</span>
+        <div class="bar" aria-hidden="true"><i class="blk" style="left:39.58333333333333%;width:2.083333333333333%"></i><i class="blk" style="left:63.888888888888886%;width:21.52777777777778%"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Wed</span>
         <span class="date">Wednesday 25 November</span>
         <span class="slots"><b>busy all day</b></span>
+        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
       <li class="day">
         <span class="wd">Thu</span>
         <span class="date">Thursday 26 November</span>
         <span class="slots"><b>busy all day</b></span>
+        <div class="bar" aria-hidden="true"><i class="blk all"></i></div>
+        <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
   </ul>
@@ -167,7 +219,7 @@
   </footer>
 </main>
 <script>
-  const generated = "2026-11-06T00:49:31.715Z";
+  const generated = "2026-11-06T00:51:57.658Z";
   document.getElementById("gen").textContent = "generated " + new Date(generated).toLocaleString() + ".";
 </script>
 </body>
