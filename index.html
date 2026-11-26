@@ -231,14 +231,14 @@
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
         
       </li>
-      <li class="day travel free">
+      <li class="day">
         <span class="wd">Wed</span>
         <span class="date">Wednesday 16 December</span>
-        <span class="slots">free</span>
+        <span class="slots">18:45–19:45</span>
         <div class="bar" role="slider" tabindex="0" data-i="20"
-             aria-label="read the time on Wednesday 16 December — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
+             aria-label="read the time on Wednesday 16 December — arrow keys move through the day"><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"><i style="left:75.00%;width:25.00%"></i></span><span class="hbox"><i style="left:0.00%;width:75.00%"></i></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span><span class="hbox"></span></div>
         <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
-        <span class="badge">can travel — Bendigo or Melbourne</span>
+        
       </li>
   </ul>
   <footer>
@@ -248,10 +248,10 @@
   </footer>
 </main>
 <script>
-  const generated = "2026-11-25T13:41:03.923Z";
+  const generated = "2026-11-26T01:41:05.041Z";
   // Labels read off the SAME spans the boxes were filled from, so a tooltip can never contradict the colour
   // under the pointer.
-  const DAYS = [{"label":"Thursday 26 November","allDay":true,"spans":[[650,1230]]},{"label":"Friday 27 November","allDay":false,"spans":[[740,1140]]},{"label":"Saturday 28 November","allDay":false,"spans":[[570,630],[740,1230]]},{"label":"Sunday 29 November","allDay":false,"spans":[[825,1230]]},{"label":"Monday 30 November","allDay":false,"spans":[]},{"label":"Tuesday 1 December","allDay":false,"spans":[[920,1230]]},{"label":"Wednesday 2 December","allDay":false,"spans":[]},{"label":"Thursday 3 December","allDay":false,"spans":[[650,1230]]},{"label":"Friday 4 December","allDay":false,"spans":[[740,1140]]},{"label":"Saturday 5 December","allDay":false,"spans":[[570,630],[740,1230]]},{"label":"Sunday 6 December","allDay":false,"spans":[[825,1230]]},{"label":"Monday 7 December","allDay":false,"spans":[]},{"label":"Tuesday 8 December","allDay":false,"spans":[[630,690],[920,1230]]},{"label":"Wednesday 9 December","allDay":false,"spans":[[880,940]]},{"label":"Thursday 10 December","allDay":false,"spans":[[650,1230]]},{"label":"Friday 11 December","allDay":false,"spans":[[120,180],[740,1140]]},{"label":"Saturday 12 December","allDay":false,"spans":[[570,630],[740,1230]]},{"label":"Sunday 13 December","allDay":false,"spans":[[825,1230]]},{"label":"Monday 14 December","allDay":false,"spans":[]},{"label":"Tuesday 15 December","allDay":false,"spans":[[920,1230]]},{"label":"Wednesday 16 December","allDay":false,"spans":[]}];
+  const DAYS = [{"label":"Thursday 26 November","allDay":true,"spans":[[650,1230]]},{"label":"Friday 27 November","allDay":false,"spans":[[740,1140]]},{"label":"Saturday 28 November","allDay":false,"spans":[[570,630],[740,1230]]},{"label":"Sunday 29 November","allDay":false,"spans":[[825,1230]]},{"label":"Monday 30 November","allDay":false,"spans":[]},{"label":"Tuesday 1 December","allDay":false,"spans":[[920,1230]]},{"label":"Wednesday 2 December","allDay":false,"spans":[]},{"label":"Thursday 3 December","allDay":false,"spans":[[650,1230]]},{"label":"Friday 4 December","allDay":false,"spans":[[740,1140]]},{"label":"Saturday 5 December","allDay":false,"spans":[[570,630],[740,1230]]},{"label":"Sunday 6 December","allDay":false,"spans":[[825,1230]]},{"label":"Monday 7 December","allDay":false,"spans":[]},{"label":"Tuesday 8 December","allDay":false,"spans":[[630,690],[920,1230]]},{"label":"Wednesday 9 December","allDay":false,"spans":[[880,940]]},{"label":"Thursday 10 December","allDay":false,"spans":[[650,1230]]},{"label":"Friday 11 December","allDay":false,"spans":[[120,180],[740,1140]]},{"label":"Saturday 12 December","allDay":false,"spans":[[570,630],[740,1230]]},{"label":"Sunday 13 December","allDay":false,"spans":[[825,1230]]},{"label":"Monday 14 December","allDay":false,"spans":[]},{"label":"Tuesday 15 December","allDay":false,"spans":[[920,1230]]},{"label":"Wednesday 16 December","allDay":false,"spans":[[1125,1185]]}];
   const hm = (m) => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
   document.getElementById("gen").textContent = "generated " + new Date(generated).toLocaleString() + ".";
 
